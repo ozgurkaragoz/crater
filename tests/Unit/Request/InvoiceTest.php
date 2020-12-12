@@ -44,7 +44,7 @@ test('invoice request validation rules', function () {
                 'max:255'
             ],
             'items.*.description' => [
-                'max:750'
+                'max:1500'
             ],
             'items.*.name' => [
                 'required'

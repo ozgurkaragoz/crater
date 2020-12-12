@@ -40,7 +40,7 @@ test('estimate request validation rules', function () {
                 'array'
             ],
             'items.*.description' => [
-                'max:750'
+                'max:1500'
             ],
             'items.*' => [
                 'required',

@@ -61,7 +61,7 @@ class EstimatesRequest extends FormRequest
                 'array'
             ],
             'items.*.description' => [
-                'max:750'
+                'max:1500'
             ],
             'items.*' => [
                 'required',
