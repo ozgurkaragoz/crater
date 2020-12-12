@@ -26,6 +26,9 @@ class ItemsRequest extends FormRequest
             'name' => [
                 'required'
             ],
+            'completed_at' => [
+                'nullable',
+            ],
             'price' => [
                 'required'
             ],

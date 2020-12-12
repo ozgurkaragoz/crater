@@ -122,6 +122,7 @@ export default {
         search,
         filter: {
           name: search,
+          completed_at: '',
           unit: '',
           price: '',
         },

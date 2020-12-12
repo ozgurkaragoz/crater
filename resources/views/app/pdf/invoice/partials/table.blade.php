@@ -2,6 +2,7 @@
     <tr class="item-table-heading-row">
         <th width="2%" class="pr-20 text-right item-table-heading">#</th>
         <th width="40%" class="pl-0 text-left item-table-heading">@lang('pdf_items_label')</th>
+        <th class="pr-20 text-right item-table-heading">@lang('pdf_completed_at_label')</th>
         <th class="pr-20 text-right item-table-heading">@lang('pdf_quantity_label')</th>
         <th class="pr-20 text-right item-table-heading">@lang('pdf_price_label')</th>
         @if($invoice->discount_per_item === 'YES')
@@ -26,6 +27,12 @@
             >
                 <span>{{ $item->name }}</span><br>
                 <span class="item-description">{!! nl2br(htmlspecialchars($item->description)) !!}</span>
+            </td>
+            <td
+                class="pr-20 text-right item-cell"
+                style="vertical-align: top;"
+            >
+                {{$item->formattedCompletedAt}}
             </td>
             <td
                 class="pr-20 text-right item-cell"

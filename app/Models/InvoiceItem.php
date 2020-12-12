@@ -16,6 +16,7 @@ class InvoiceItem extends Model
     protected $fillable = [
         'invoice_id',
         'name',
+        'completed_at',
         'item_id',
         'description',
         'company_id',
@@ -35,6 +36,10 @@ class InvoiceItem extends Model
         'quantity' => 'float',
         'discount_val' => 'integer',
         'tax' => 'integer'
+    ];
+
+    protected $appends = [
+        'formattedCompletedAt',
     ];
 
     public function invoice()
@@ -83,5 +88,11 @@ class InvoiceItem extends Model
         $query->select(
             DB::raw('sum(quantity) as total_quantity, sum(total) as total_amount, invoice_items.name')
         )->groupBy('invoice_items.name');
+    }
+
+    public function getFormattedCompletedAtAttribute($value)
+    {
+        $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
+        return Carbon::parse($this->completed_at)->format($dateFormat);
     }
 }

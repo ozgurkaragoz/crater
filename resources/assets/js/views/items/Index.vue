@@ -182,6 +182,13 @@
 
         <sw-table-column
           :sortable="true"
+          :label="$t('items.completed_at')"
+          sort-as="completed_at"
+          show="formattedCompletedAt"
+        />
+
+        <sw-table-column
+          :sortable="true"
           :label="$t('items.unit')"
           show="unit_name"
         >
@@ -275,6 +282,7 @@ export default {
       isRequestOngoing: true,
 
       filters: {
+        completed_at: '',
         name: '',
         unit: '',
         price: '',
@@ -381,6 +389,7 @@ export default {
 
     clearFilter() {
       this.filters = {
+        completed_at: '',
         name: '',
         unit: '',
         price: '',

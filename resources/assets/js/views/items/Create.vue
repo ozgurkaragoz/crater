@@ -42,6 +42,22 @@
             </sw-input-group>
 
             <sw-input-group
+              :label="$t('items.completed_at')"
+              :error="completedAtError"
+              class="mb-4"
+            >
+              <base-date-picker
+                v-model="formData.completed_at"
+                enable-time="true"
+                :calendar-button="true"
+                calendar-button-icon="calendar"
+                class="mt-2"
+                name="completed_at"
+                @change="$v.formData.completed_at.$touch()"
+              />
+            </sw-input-group>
+
+            <sw-input-group
               :label="$t('items.price')"
               :error="priceError"
               class="mb-4"
@@ -158,6 +174,7 @@ export default {
 
       formData: {
         name: '',
+        completed_at: '',
         description: '',
         price: '',
         unit_id: null,
@@ -239,6 +256,12 @@ export default {
       }
     },
 
+    completedAtError() {
+      if (!this.$v.formData.completed_at.$error) {
+        return ''
+      }
+    },
+
     priceError() {
       if (!this.$v.formData.price.$error) {
         return ''
@@ -284,6 +307,8 @@ export default {
         required,
         minLength: minLength(3),
       },
+
+      completed_at: {},
 
       price: {
         required,

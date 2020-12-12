@@ -22,7 +22,8 @@ class Item extends Model
     ];
 
     protected $appends = [
-        'formattedCreatedAt'
+        'formattedCreatedAt',
+        'formattedCompletedAt',
     ];
 
     public function unit()
@@ -102,6 +103,12 @@ class Item extends Model
         return Carbon::parse($this->created_at)->format($dateFormat);
     }
 
+    public function getFormattedCompletedAtAttribute($value)
+    {
+        $dateFormat = CompanySetting::getSetting('carbon_date_format', $this->company_id);
+        return Carbon::parse($this->completed_at)->format($dateFormat);
+    }
+
     public function taxes()
     {
         return $this->hasMany(Tax::class)
@@ -146,7 +153,6 @@ class Item extends Model
     public function updateItem($request)
     {
         $this->update($request->validated());
-
         $this->taxes()->delete();
 
         if ($request->has('taxes')) {

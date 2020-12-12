@@ -25,6 +25,20 @@
           variant="horizontal"
           required
         >
+          <sw-text
+            v-model="completed_at"
+            class="relative w-full focus:border focus:border-solid focus:border-primary"
+            @input="$v.formData.completed_at.$touch()"
+          />
+        </sw-input-group>
+
+        <sw-input-group
+          :label="$t('items.price')"
+          :error="priceError"
+          class="mb-4"
+          variant="horizontal"
+          required
+        >
           <sw-money
             v-model="price"
             :currency="defaultCurrencyForInput"
@@ -33,6 +47,7 @@
             @input="$v.formData.price.$touch()"
           />
         </sw-input-group>
+
         <sw-input-group
           :label="$t('items.unit')"
           class="mb-4"
@@ -128,6 +143,7 @@ export default {
       taxes: [],
       formData: {
         name: null,
+        completed_at: null,
         price: null,
         description: null,
         unit: null,
@@ -141,6 +157,8 @@ export default {
       name: {
         required,
         minLength: minLength(3),
+      },
+      completed_at: {
       },
       price: {
         required,
@@ -255,6 +273,7 @@ export default {
     resetFormData() {
       this.formData = {
         name: null,
+        completed_at: null,
         price: null,
         description: null,
         unit: null,
@@ -267,6 +286,7 @@ export default {
       this.tempData = this.getItemById(this.modalDataID)
       if (this.tempData) {
         this.formData.name = this.tempData.name
+        this.formData.completed_at = this.tempData.completed_at
         this.formData.price = this.tempData.price
         this.formData.description = this.tempData.description
         this.formData.unit = this.tempData.unit

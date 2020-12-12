@@ -5,7 +5,8 @@
         <colgroup>
           <col style="width: 40%" />
           <col style="width: 10%" />
-          <col style="width: 15%" />
+          <col style="width: 5%" />
+          <col style="width: 10%" />
           <col v-if="discountPerItem === 'YES'" style="width: 15%" />
           <col style="width: 15%" />
         </colgroup>
@@ -32,6 +33,13 @@
                   @onSelectItem="isSelected = true"
                 />
               </div>
+            </td>
+            <td class="px-1 py-4 text-right align-top">
+              <sw-input
+                v-model="item.completed_at"
+                type="text"
+                small
+              />
             </td>
             <td class="px-5 py-4 text-right align-top">
               <sw-input
@@ -326,6 +334,9 @@ export default {
         name: {
           required,
         },
+        completed_at: {
+          required,
+        },
         quantity: {
           required,
           minValue: minValue(0),
@@ -394,6 +405,7 @@ export default {
     },
     onSelectItem(item) {
       this.item.name = item.name
+      this.item.completed_at = item.completed_at
       this.item.price = item.price
       this.item.item_id = item.id
       this.item.description = item.description
